@@ -13,14 +13,6 @@ Ask for the **full workflow** (one `run_all.sh`), any **single step**, or any **
 
 Ask about commands (`gmx trjconv`), mdp options (`tau-p`), file formats, errors (`LINCS warnings`), or restarting and extending runs. Answers come from the offline knowledge base in `kb.js`. Optionally, enter an Anthropic API key in Settings and open questions go to Claude. The key is kept in session storage and sent only to api.anthropic.com.
 
-## Publish on GitHub (browser only)
-1. Create a new repository on github.com.
-2. Click **Add file > Upload files**, drag in all files from this folder (keep `logo.png` and `avatar.png`), and commit.
-3. Go to **Settings > Pages**, set Source to **Deploy from a branch**, branch `main`, folder `/ (root)`, and save.
-4. After a minute the bot is live at `https://<your-user>.github.io/<repo>/`.
-
-You can also open `index.html` directly in a browser.
-
 ## Files
 - `index.html`, `style.css`: interface
 - `app.js`: chat logic, intent detection, optional Claude call
