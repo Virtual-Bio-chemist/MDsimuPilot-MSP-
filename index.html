@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Virtual Bio-Chemist | GROMACS assistant</title>
+<link rel="icon" href="avatar.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <img src="logo.png" alt="Virtual Bio-Chemist" class="logo">
+  <div class="head-text">
+    <h1>GROMACS assistant</h1>
+    <p>Ask for a full workflow, one step, an analysis, or any GROMACS command.</p>
+  </div>
+  <button id="btnSettings" class="ghost" aria-expanded="false">Settings</button>
+</header>
+
+<section id="settings" hidden>
+  <h2>File names and parameters</h2>
+  <p class="hint">Scripts use these names. You can also type a file name in chat (for example "rmsd for run1.xtc") and it overrides the setting for that reply.</p>
+  <div class="grid">
+    <label>GROMACS command<input id="gmx" value="gmx"></label>
+    <label>Input structure (.pdb / .gro)<input id="input" value="protein.pdb"></label>
+    <label>Topology (.top)<input id="top" value="topol.top"></label>
+    <label>Processed structure (.gro)<input id="proc" value="processed.gro"></label>
+    <label>Solvated + ions (.gro)<input id="solv" value="solv_ions.gro"></label>
+    <label>Minimization prefix<input id="p_em" value="em"></label>
+    <label>NVT prefix<input id="p_nvt" value="nvt"></label>
+    <label>NPT prefix<input id="p_npt" value="npt"></label>
+    <label>Production prefix<input id="p_md" value="md"></label>
+    <label>Trajectory format
+      <select id="traj"><option value="xtc">.xtc (compressed)</option><option value="trr">.trr (full precision)</option></select></label>
+    <label>Force field
+      <select id="ff">
+        <option>amber99sb-ildn</option><option>amber99sb</option><option>amber03</option>
+        <option>charmm27</option><option>charmm36-jul2022</option>
+        <option>gromos54a7</option><option>gromos53a6</option><option>oplsaa</option>
+      </select></label>
+    <label>Water model
+      <select id="water"><option>tip3p</option><option>spce</option><option>spc</option><option>tip4p</option></select></label>
+    <label>Box type
+      <select id="box"><option>dodecahedron</option><option>cubic</option><option>octahedron</option></select></label>
+    <label>Box distance (nm)<input id="dist" type="number" step="0.1" value="1.0"></label>
+    <label>Salt concentration (M)<input id="conc" type="number" step="0.01" value="0.15"></label>
+    <label>Temperature (K)<input id="temp" type="number" value="300"></label>
+    <label>Time step (ps)<input id="dt" type="number" step="0.001" value="0.002"></label>
+    <label>NVT length (ps)<input id="nvt_ps" type="number" value="100"></label>
+    <label>NPT length (ps)<input id="npt_ps" type="number" value="100"></label>
+    <label>Production length (ns)<input id="md_ns" type="number" value="10"></label>
+    <label>Extra mdrun flags<input id="mdrun" placeholder="-ntmpi 1 -ntomp 8 -nb gpu"></label>
+  </div>
+  <h2>Optional: Claude API</h2>
+  <p class="hint">Offline mode works without a key. With a key, questions the built-in knowledge base cannot answer go to Claude. The key stays in this browser tab (session storage) and is sent only to api.anthropic.com.</p>
+  <div class="grid">
+    <label>API key<input id="apikey" type="password" placeholder="sk-ant-..." autocomplete="off"></label>
+    <label>Model<input id="model" value="claude-sonnet-5-5"></label>
+    <label class="check"><input id="useapi" type="checkbox"> Use Claude for answers not found offline</label>
+  </div>
+  <button id="btnSave">Save settings</button>
+</section>
+
+<main id="chat" aria-live="polite"></main>
+
+<div id="quick">
+  <button data-q="Full workflow script">Full workflow</button>
+  <button data-q="1. System preparation">1. Prepare</button>
+  <button data-q="2. Energy minimization">2. Minimize</button>
+  <button data-q="3. Equilibration">3. Equilibrate</button>
+  <button data-q="4. Production run">4. Production</button>
+  <button data-q="5. PBC correction">5. PBC</button>
+  <button data-q="Analysis menu">Analysis</button>
+  <button data-q="help">Help</button>
+</div>
+
+<form id="composer" autocomplete="off">
+  <input id="msg" placeholder="Ask anything about GROMACS..." aria-label="Message">
+  <button type="submit">Send</button>
+</form>
+
+<script src="kb.js"></script>
+<script src="gen.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
