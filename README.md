@@ -18,13 +18,6 @@ Ask for the **full workflow** (one `run_all.sh`), any **single step**, or any **
 
 Ask about commands (`gmx trjconv`), mdp options (`tau-p`), file formats, errors (`LINCS warnings`), or restarting and extending runs. Answers come from the offline knowledge base in `kb.js`. Optionally, enter an Anthropic API key in Settings and open questions go to Claude. The key is kept in session storage and sent only to api.anthropic.com.
 
-## Files
-- `index.html`, `style.css`: interface
-- `app.js`: chat logic, intent detection, optional Claude call
-- `gen.js`: script and mdp generators
-- `kb.js`: GROMACS knowledge base (commands, mdp options, topics, troubleshooting)
-- `logo.png`, `avatar.png`: branding
-
 ## Notes
 - Generated scripts target GROMACS 2021+ (C-rescale barostat, `gmx dssp` needs 2023+). Check with `gmx --version`.
 - Parameters are sensible protein-in-water defaults, not a substitute for reading the manual for your system (ligands, membranes, and so on).
